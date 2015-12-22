@@ -1,6 +1,7 @@
 (ns sito.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
+            [compojure.handler :refer [site]]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]            
             [ring.adapter.jetty :as jetty]
             [environ.core :refer [env]]
@@ -16,7 +17,7 @@
 
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 5000))]
-    (jetty/run-jetty (site #'app) {:port port :join? false})))
+    (jetty/run-jetty (site #'app-routes) {:port port :join? false})))
 
 ;; For interactive development:
 ;; (.stop server)
