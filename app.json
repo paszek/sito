@@ -1,0 +1,6 @@
+{
+  "name": "sito",
+  "description": "Household expenditure management",
+  "image": "heroku/clojure",
+  "addons": [ "heroku-postgresql" ]
+}
