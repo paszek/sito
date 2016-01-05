@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+/* 1920 Leyendecker */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block; 
+}
+
+html {
+    line-height: 1;
+    height: 100%; 
+}
+
+body {
+    min-height: 100%;
+    position: relative; 
+}
+
+.container {
+    max-width: 59em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2em; 
+}
+.container:after {
+    content: " ";
+    display: block;
+    clear: both; 
+}
+
+.header {
+    z-index: 100;
+    padding: 0 1em;
+    margin-bottom: 1.5em;
+    position: relative; 
+    color: #ecdfdb;
+    background-color: #20457c; 
+}
+
+.main {
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #3b3a38;
+    background-color: #ecdfdb; 
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600; 
+}
+
+
+/* 
+Generic Styling, for Desktops/Laptops 
+*/
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+  background: #eee; 
+}
+th { 
+  background: #333; 
+  color: white; 
+  font-weight: bold; 
+}
+td, th { 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: left; 
+}

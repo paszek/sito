@@ -2,12 +2,15 @@ heroku.txt
 pom.xml
 pom.xml.asc
 *jar
+*sql
 /lib/
 /classes/
 /target/
 /checkouts/
+.lein-env
 .lein-deps-sum
 .lein-repl-history
 .lein-plugins/
 .lein-failures
 .nrepl-port
+/pg/

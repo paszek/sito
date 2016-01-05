@@ -10,13 +10,11 @@
                  [ring/ring-jetty-adapter "1.4.0"]
                  [environ "1.0.0"]                 
                  [org.clojure/java.jdbc "0.4.2"]
-                 [org.postgresql/postgresql "9.4-1201-jdbc4"]]
+                 [org.postgresql/postgresql "9.4-1201-jdbc4"]
+                 [hiccup "1.0.5"]]
   :plugins [[lein-ring "0.9.7"]
             [environ/environ.lein "0.3.1"]]
-  :ring {:handler sito.handler/app}
+  :ring {:handler sito.handler/app
+         :init sito.migration/migrate}
   :hooks [environ.leiningen.hooks]
-  :uberjar-name "sito-standalone.jar"
-  :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.0"]]}
-   :production {:env {:production true}}})
+  :uberjar-name "sito-standalone.jar")
