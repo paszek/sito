@@ -40,3 +40,10 @@
 (defn read-category-all []
   (k/select e/category
             (k/order :id)))
+
+(defn read-category-name [name]
+  (k/select e/category
+            (k/where (= :name name))))
+
+(defn create-category [name]
+  (k/insert e/category (k/values {:name name})))
