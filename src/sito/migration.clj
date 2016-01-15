@@ -1,9 +1,9 @@
 (ns sito.migration 
-  (:require [sito.model.db :refer :all]
+  (:require [sito.model.db :as conf]
             [lobos.core :as l]
-            [lobos.connectivity :refer :all]))
+            [lobos.connectivity :refer [open-global]]))
 
-(open-global db-conf)
+(open-global conf/db-conf)
 
 (defn migrate-sito []
   (println "Migration...")
