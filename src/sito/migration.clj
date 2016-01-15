@@ -3,7 +3,7 @@
             [lobos.core :as l]
             [lobos.connectivity :refer :all]))
 
-(open-global db-spec)
+(open-global db-conf)
 
 (defn migrate-sito []
   (println "Migration...")
