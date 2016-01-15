@@ -1,12 +1,11 @@
 (ns sito.model.db
   (:use korma.db)
-  (:require [clojure.string :as str]
-            [environ.core :refer [env]]))
+  (:require [environ.core :refer [env]]))
 
-(def db-spec
+(def db-conf
   (env :korma-db))
 
 (def db-postgres
-  (postgres db-spec))
+  (postgres db-conf))
 
 (defdb korma-db db-postgres)
