@@ -1,9 +1,6 @@
 (ns sito.migration 
-  (:require [sito.model.db :as conf]
-            [lobos.core :as l]
-            [lobos.connectivity :as l-c]))
-
-(l-c/open-global conf/db-conf)
+  (:require [sito.model.db]
+            [lobos.core :as l]))
 
 (defn migrate-sito []
   (println "Migration...")
