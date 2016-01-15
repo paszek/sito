@@ -28,9 +28,9 @@
            [:tr {:id (str "id-" (:id expense))} 
             [:td [:a {:href (str "/expenses/" (:id expense))} (:name expense)]]
             [:td (:amount expense)]
-            [:td (:category expense)]
-            [:td (:transaction-date expense)]
-            [:td (:appuser-id expense)]])
+            [:td (:name (first (:category expense)))]
+            [:td (:transaction_date expense)]
+            [:td (:appuser_name expense)]])
          expenses)]])
 
 (defn categories-as-name-id [categories]

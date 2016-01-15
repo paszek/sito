@@ -1,24 +1,11 @@
-(ns sito.migration
-  (:require [clojure.java.jdbc :as jdbc]
-            [sito.model :as model]))
+(ns sito.migration 
+  (:require [sito.model.db :refer :all]
+            [lobos.core :as l]
+            [lobos.connectivity :refer :all]))
 
-(defn migrate []
-  (println "Init"))
+(open-global db-spec)
 
-(defn migrated? []
-  (-> (jdbc/query model/database-url
-                 [(str "select count(*) from information_schema.tables "
-                       "where table_name='expense'")])
-      first :count pos?))
-
-(defn migrate-copy []
-  (when (not (migrated?))
-    (print "Creating database structure...") (flush)
-    (jdbc/db-do-commands model/database-url
-                        (jdbc/create-table-ddl
-                         :expense
-                         [:id :serial "PRIMARY KEY"]
-                         [:name :text "NOT NULL"]
-                         [:transaction_date :timestamp
-                          "NOT NULL" "DEFAULT CURRENT_TIMESTAMP"]))
-    (println " done")))
+(defn migrate-sito []
+  (println "Migration...")
+  (l/migrate) ;needs  lobos/migrations.clj
+  (println " Done!"))

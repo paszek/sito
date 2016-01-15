@@ -1,7 +1,8 @@
 (ns sito.model
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.string :as str]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            [sito.model.queries :as q]))
 
 (def database-url
   (env :database-url))
@@ -15,9 +16,9 @@
 
 ;;expense
 (defn expense-all []
-  (into [] (db-query ["select * from expense order by id desc"])))
+  (q/read-expense-all))
 
-(defn expense-take [range]
+(defn expense-limit [range]
   (into [] (db-query [(str "select * from expense order by id desc limit " range)])))
 
 (defn expense [id]

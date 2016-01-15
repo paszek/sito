@@ -7,19 +7,19 @@
 (def timestamp-regex
   #"[0-9]{4}[-]?[0-9]{1,2}[-]?[0-9]{1,2} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}[.]?[0-9]{1,6}")
 
-(defn name [input]
+(defn exp-name [input]
   input)
 
-(defn amount [input]
+(defn exp-amount [input]
   (let [float-input (re-matches amount-regex (str/replace (str "0" input) #"," "."))]
     (if (some? float-input)
       (* 1.0 (read-string float-input))
       0.0)))
 
-(defn category [input]
+(defn exp-category [input]
   (Integer/parseInt input))
 
-(defn trans-date [input]
+(defn exp-trans-date [input]
   (let [timestamp-input (re-matches timestamp-regex (str input " 12:00:00"))]
     (if (some? timestamp-input)
       (java.sql.Timestamp/valueOf timestamp-input)
