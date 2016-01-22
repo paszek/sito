@@ -1,7 +1,7 @@
 (ns sito.layout
   (:require [hiccup.page :as h]))
 
-(defn common [title & body]
+(defn common [logged title & body]
   (h/html5
    [:head
     [:meta {:charset "utf-8"}]
@@ -12,5 +12,13 @@
     (h/include-css "/stylesheet/base.css")]
    [:body {:class "app"}
     [:div {:class "wrapper"}
-     [:div {:class "header"} [:h1 "SITO"]]
-     [:div {:id "content" :class "main container"} body]]]))
+     [:div {:class "header"}
+      [:div {:class "max container"}
+       [:div {:class "inline side"}] 
+       [:div {:class "inline center"} [:h1 "SITO"]] 
+       [:div {:class "inline side right"} 
+        (if (= :true logged) 
+          [:a {:href "/logout/" :class "inline power-off square-2"} " " ]
+          [:div {:class "inline square-2"} " " ])]]]
+     [:div {:id "content" :class "main max container"} body]]]))
+

@@ -3,10 +3,13 @@
             [ring.adapter.jetty :as jetty]
             [environ.core :refer [env]]
             [sito.migration :refer [migrate-sito]]
+            [sito.auth :refer [wrap-auth]]
             [sito.controller :refer [app-routes]]))
 
 (def app
-  (wrap-defaults app-routes site-defaults))
+  (-> app-routes
+      (wrap-auth)
+      (wrap-defaults site-defaults)))
 
 (defn -main [& [port]]
   (migrate-sito)

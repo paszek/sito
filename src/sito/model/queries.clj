@@ -38,12 +38,16 @@
                           :category_id category})))))
 
 (defn read-category-all []
-  (k/select e/category
-            (k/order :id)))
+  (k/select e/category (k/order :id)))
 
 (defn read-category-name [name]
-  (k/select e/category
-            (k/where (= :name name))))
+  (k/select e/category (k/where (= :name name))))
 
 (defn create-category [name]
   (k/insert e/category (k/values {:name name})))
+
+(defn read-appuser [username]
+  (k/select e/appuser (k/where (= :name username))))
+
+(defn create-appuser [username password]
+  (k/insert e/appuser (k/values {:name username :hash_password password})))

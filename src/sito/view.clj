@@ -9,16 +9,21 @@
    (form/form-to [:post "/expenses/"]
                  (anti-forgery/anti-forgery-field)
                  [:section
-                  (form/label "name" "What?")
-                  (form/text-field "name")
-                  (form/label "amount" "How much?")
-                  (form/text-field "amount")
-                  (form/label "trans-date" "When?")
-                  [:input {:type "date" :name "trans-date"}]
-                  (form/label "category" "Category")
-                  [:select {:name "category"} 
-                   (form/select-options categories "1")]]
-                 (form/submit-button "ADD"))])
+                  [:div {:class "labeled-input center container"}
+                   [:label {:for "name" :class "inline width-10 right"} "What? "]
+                   [:input {:type "text" :class "inline width-10" :name "name"}]]
+                  [:div {:class "labeled-input center container"}
+                   [:label {:for "amount" :class "inline width-10 right"} "How much? "]
+                   [:input {:type "text" :class "inline width-10" :name "amount"}]]
+                  [:div {:class "labeled-input center container"}
+                   [:label {:for "trans-date" :class "inline width-10 right"} "When? "]
+                   [:input {:type "date" :class "inline width-10" :name "trans-date"}]]
+                  [:div {:class "labeled-input center container"}
+                   [:label {:for "category" :class "inline width-10 right"} "Category "]                   
+                   [:select {:name "category" :class "inline width-10"} 
+                    (form/select-options categories (second (first categories)))]]]
+                 [:div {:class "center container marg-vert-1"} 
+                  [:input {:type "submit" :value "+" :class "square-2"}]])])
 
 (defn expenses-list [expenses]
   [:table 
@@ -33,21 +38,34 @@
             [:td (:appuser_name expense)]])
          expenses)]])
 
+(defn login-form []
+  [:div {:id "login-form" :class "form-container"}
+   (form/form-to [:post "/login/"]
+                 (anti-forgery/anti-forgery-field)
+                 [:section
+                  [:div {:class "labeled-input center container"}
+                   (form/text-field "username")]
+                  [:div {:class "labeled-input center container"}
+                   (form/password-field "password")]]
+                 [:div {:class "center container marg-vert-1"} 
+                  [:input {:type "submit" :value " " :class "square-2"}]])])
+
 (defn categories-as-name-id [categories]
   (map (juxt :name :id) categories))
 
-;/
-(defn index [body]
-  (layout/common "SITO" body))
+;/login
+(defn login []
+  (layout/common :false "SITO login" 
+                 (login-form)))
 
 ;/expenses/
 (defn expenses [expenses categories]
-  (layout/common "SITO expenses"
+  (layout/common :true "SITO expenses"
                  (expense-form (categories-as-name-id categories))
                  (expenses-list expenses)))
 
 ;/expenses/:id
 (defn expense [expense]
-  (layout/common (str "SITO expense " (:name expense))
+  (layout/common :true (str "SITO expense " (:name expense))
                  [:div {:class "container"} 
                   [:div (:name expense)]]))

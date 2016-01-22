@@ -9,53 +9,103 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     font: inherit;
     vertical-align: baseline;
 }
-
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
     display: block; 
 }
-
+a {
+    text-decoration: none;
+    color: inherit;
+}
+h1, h2, h3, h4, h5, label, input[type=submit], input[type=button]  {
+    font-weight: 600; 
+}
+h1 {
+ font-size: 1.8em;
+}
+label {
+    margin-right: 0.5em;
+}
+input[type=submit], input[type=button] {
+    padding: 0.5em 0.5em;
+    color: #ecdfdb;
+    background-color: #20457c;
+    border: 0;
+}
+input[type=text], input[type=password] {
+    border: 1px solid white;
+}
+input[type=text]:focus, input[type=password]:focus {
+    border: 1px solid #20457c;
+}
 html {
-    line-height: 1;
+    line-height: 1.5em;
     height: 100%; 
 }
-
 body {
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
     min-height: 100%;
     position: relative; 
 }
-
 .container {
-    max-width: 59em;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 2em; 
 }
 .container:after {
     content: " ";
     display: block;
     clear: both; 
 }
-
 .header {
     z-index: 100;
-    padding: 0 1em;
-    margin-bottom: 1.5em;
+    padding: 1em 1em;
     position: relative; 
     color: #ecdfdb;
-    background-color: #20457c; 
+    background-color: #20457c;
 }
-
+.power-off {
+    background-color: #fb6648;
+    color: #20457c;
+    vertical-align: middle;
+}
+.center {
+    text-align: center;
+    width: 60%;
+}
+.side {
+    width: 20%;
+}
+.right {
+    text-align: right;
+}
+.inline {
+    display: inline-block;
+}
 .main {
-    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #3b3a38;
     background-color: #ecdfdb; 
+    padding: 2em 2em; 
 }
-
-h1, h2, h3, h4, h5 {
-    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 600; 
+.max {
+    max-width: 59em;
 }
-
+.square-2 {
+    width: 2em;
+    height: 2em;
+}
+.marg-vert-1 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.marg-1 {
+    margin: 1em;
+}
+.width-10 {
+    width: 10em;
+}
+.labeled-input {
+    max-width: 20em;
+    padding: 0.5em 0.5em; 
+}
 
 /* 
 Generic Styling, for Desktops/Laptops 

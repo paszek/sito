@@ -32,3 +32,7 @@
                  (integer :category_id [:refer :category :id :on-delete :set-null])
                  (integer :expense_id [:refer :expense :id :on-delete :set-null]))))
   (down [] (drop (table :expense_category))))
+
+(defmigration add-password-column
+  (up [] (alter :add (table :appuser (varchar :hash_password 255))))
+  (down [] ))

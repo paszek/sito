@@ -7,6 +7,9 @@
 (def timestamp-regex
   #"[0-9]{4}[-]?[0-9]{1,2}[-]?[0-9]{1,2} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}[.]?[0-9]{1,6}")
 
+(defn id [id]
+  (Integer/parseInt id))
+
 (defn exp-name [input]
   input)
 
