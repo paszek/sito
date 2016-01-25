@@ -58,13 +58,20 @@ body {
 .header {
     z-index: 100;
     padding: 1em 1em;
-    position: relative; 
+    margin: 0 auto;
+    position: relative;
     color: #ecdfdb;
     background-color: #20457c;
 }
 .power-off {
     background-color: #fb6648;
-    color: #20457c;
+    vertical-align: middle;
+}
+.power-on {
+    background-color: #5e3448;
+    vertical-align: middle;
+}
+.vert-middle {
     vertical-align: middle;
 }
 .center {
@@ -73,6 +80,7 @@ body {
 }
 .side {
     width: 20%;
+    min-width: 2em;
 }
 .right {
     text-align: right;
@@ -83,7 +91,10 @@ body {
 .main {
     color: #3b3a38;
     background-color: #ecdfdb; 
-    padding: 2em 2em; 
+    padding: 1em 2em; 
+}
+.login {
+    margin: 3em auto;
 }
 .max {
     max-width: 59em;
@@ -102,9 +113,15 @@ body {
 .width-10 {
     width: 10em;
 }
+.width-6 {
+    width: 6em;
+}
 .labeled-input {
-    max-width: 20em;
-    padding: 0.5em 0.5em; 
+    padding: 0.2em 0.2em; 
+}
+.big {
+    font-size: 4em;
+    padding: 2em;
 }
 
 /* 
@@ -124,7 +141,50 @@ th {
   font-weight: bold; 
 }
 td, th { 
-  padding: 6px; 
+  padding: 0.1em; 
   border: 1px solid #ccc; 
   text-align: left; 
+}
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #20457c; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+        td:nth-of-type(1):before { content: "Name"; }
+	td:nth-of-type(2):before { content: "Price"; }
+	td:nth-of-type(3):before { content: "Category"; }
+	td:nth-of-type(4):before { content: "Date"; }
+	td:nth-of-type(5):before { content: "User"; }
 }

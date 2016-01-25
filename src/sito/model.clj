@@ -1,7 +1,5 @@
 (ns sito.model
-  (:require [clojure.java.jdbc :as jdbc]
-            [clojure.string :as str]
-            [environ.core :refer [env]]
+  (:require [clojure.string :as str]
             [sito.model.queries :as q]))
 
 (defn under-to-keyword-format [s] 
@@ -17,8 +15,8 @@
 (defn expense [id]
   (first (q/read-expense-id id)))
 
-(defn expense-create [name amount category trans-date]
-  (q/create-expense name amount category trans-date))
+(defn expense-create [name amount category trans-date appuser-id]
+  (q/create-expense name amount category trans-date appuser-id))
 
 
 ;;category

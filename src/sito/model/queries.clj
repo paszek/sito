@@ -8,31 +8,32 @@
   (k/exec-raw [(str "select count(*) from information_schema.tables "
                     "where table_name='expense'")]))
 
+(def expense-base (-> (k/select* e/expense)
+                      (k/with e/appuser (k/fields [:name :appuser_name]))
+                      (k/with e/category)
+                      (k/order :transaction_date :DESC)))
+
 (defn read-expense-all []
-  (k/select e/expense
-            (k/with e/appuser (k/fields [:name :appuser_name]))
-            (k/with e/category)
-            (k/order :transaction_date)))
+  (-> expense-base
+      (k/select)))
 
 (defn read-expense-limit [l]
-  (k/select e/expense
-            (k/with e/appuser)
-            (k/with e/category)
-            (k/order :transaction_date)
-            (k/limit l)))
+  (-> expense-base
+      (k/limit l)
+      (k/select)))
 
 (defn read-expense-id [id]
-  (k/select e/expense
-            (k/with e/appuser)
-            (k/with e/category)
-            (k/where (= :id id))))
+  (-> expense-base
+      (k/where (= :id id))
+      (k/select)))
 
-(defn create-expense [name amount category trans-date]
+(defn create-expense [name amount category trans-date appuser-id]
   (k-db/transaction
    (let [expense-id (k/insert e/expense
                               (k/values {:name name 
                                          :amount amount
-                                         :transaction_date trans-date}))]
+                                         :transaction_date trans-date
+                                         :appuser_id appuser-id}))]
      (k/insert "expense_category"
                (k/values {:expense_id (:id expense-id) 
                           :category_id category})))))

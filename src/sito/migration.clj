@@ -34,6 +34,6 @@
   (println "Migration...")
   (l/migrate) ;needs  lobos/migrations.clj
   (populate-category categories)
-  (println " Done!"))
+  (println "Done!"))
 
 

@@ -7,24 +7,27 @@
             [sito.validation :as val]
             [sito.auth :as auth]))
 
-(defn lookup-user [username password]
-  (if-let [user (model/appuser username)]
-    (if (auth/check-password password (:hash_password user))
-      (dissoc user :hash_password))))
+(defn lookup-appuser [username password]
+  (if-let [appuser (model/appuser username)]
+    (if (auth/check-password password (:hash_password appuser))
+      (dissoc appuser :hash_password))))
 
 (defn get-expenses-id [{params :params :as req}]
+  (auth/auth? req)
   (view/expense (model/expense (val/id (:id params)))))
 
 (defn get-expenses [req]
-  (println req)
+  (auth/auth? req)
   (view/expenses (model/expense-all) (model/category-all)))
 
-(defn post-expenses [{params :params :as req}]
+(defn post-expenses [{params :params appuser :identity :as req}]
+  (auth/auth? req)
   (model/expense-create 
    (val/exp-name (:name params)) 
-   (val/exp-amount (:amount params)) 
-   (val/exp-category (:category params)) 
-   (val/exp-trans-date (:trans-date params)))
+   (val/exp-price (:price params)) 
+   (val/id (:category params)) 
+   (val/exp-trans-date (:trans-date params))
+   (:id appuser))
   (res/redirect "/"))
 
 (defn get-login [req]
@@ -33,14 +36,17 @@
 (defn post-login [{params :params session :session :as req}]
   (let [username (:username params)
         password (:password params)]
-    (if-let [user (lookup-user username password)]
+    (if-let [appuser (lookup-appuser username password)]
       (-> (res/redirect "/")
-          (assoc :session (assoc session :identity user)))
+          (assoc :session (assoc session :identity appuser)))
       (res/redirect "/login/"))))
 
 (defn post-logout [{params :params :as req}]
   (-> (res/redirect "/login/")
       (assoc :session {})))
+
+(defn get-not-found [req]
+  (view/not-found))
 
 (defroutes app-routes
   (GET "/expenses/:id{[0-9]+}" [] get-expenses-id)
@@ -51,4 +57,4 @@
   (GET "/logout/" [] post-logout)
   (GET "/" [] get-expenses)
 
-  (route/not-found "404"))
+  (route/not-found get-not-found))
